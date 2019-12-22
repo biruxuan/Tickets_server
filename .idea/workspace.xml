@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8477a36f-1f87-49d0-81ab-0dc2dd9d6733" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" path="C:\Go" />
+  <component name="ProjectId" id="1VICiDwyUpfC4rPguE07jN6VDWz" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/model" />
+  </component>
+  <component name="RunManager">
+    <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="Tickets_server" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/main.go" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build main.go" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1920" y="-253" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576935845907">
+      <screen x="1920" y="-848" width="1080" height="1880" />
+    </state>
+    <state x="1920" y="-253" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.-848.1080.1880@1920.-848.1080.1880" timestamp="1576935845907" />
+    <state x="2240" y="-153" key="FileChooserDialogImpl" timestamp="1576935839698">
+      <screen x="1920" y="-848" width="1080" height="1880" />
+    </state>
+    <state x="2240" y="-153" key="FileChooserDialogImpl/0.0.1536.824/1920.-848.1080.1880@1920.-848.1080.1880" timestamp="1576935839698" />
+    <state width="1037" height="559" key="GridCell.Tab.0.bottom" timestamp="1576986884334">
+      <screen x="1920" y="-848" width="1080" height="1880" />
+    </state>
+    <state width="1037" height="559" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.-848.1080.1880@1920.-848.1080.1880" timestamp="1576986884334" />
+    <state width="1037" height="559" key="GridCell.Tab.0.center" timestamp="1576986884334">
+      <screen x="1920" y="-848" width="1080" height="1880" />
+    </state>
+    <state width="1037" height="559" key="GridCell.Tab.0.center/0.0.1536.824/1920.-848.1080.1880@1920.-848.1080.1880" timestamp="1576986884334" />
+    <state width="1037" height="559" key="GridCell.Tab.0.left" timestamp="1576986884334">
+      <screen x="1920" y="-848" width="1080" height="1880" />
+    </state>
+    <state width="1037" height="559" key="GridCell.Tab.0.left/0.0.1536.824/1920.-848.1080.1880@1920.-848.1080.1880" timestamp="1576986884334" />
+    <state width="1037" height="559" key="GridCell.Tab.0.right" timestamp="1576986884334">
+      <screen x="1920" y="-848" width="1080" height="1880" />
+    </state>
+    <state width="1037" height="559" key="GridCell.Tab.0.right/0.0.1536.824/1920.-848.1080.1880@1920.-848.1080.1880" timestamp="1576986884334" />
+    <state x="2123" y="-413" width="672" height="678" key="search.everywhere.popup" timestamp="1576985180011">
+      <screen x="1920" y="-848" width="1080" height="1880" />
+    </state>
+    <state x="2123" y="-413" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/1920.-848.1080.1880@1920.-848.1080.1880" timestamp="1576985180011" />
+  </component>
+</project>
