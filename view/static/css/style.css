@@ -184,9 +184,6 @@ li {
     height: 80%;
     top: 10%;
     left: 25%;
-    border-radius: 25px;
-    background-color: #fdfdfd;
-    box-shadow: 0 0 12px 2px rgba(177, 177, 177, 0.664);
 }
 .container .buy-ticket {
     width: 100%;
@@ -195,6 +192,9 @@ li {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    border-radius: 25px;
+    background-color: #fdfdfd;
+    box-shadow: 0 0 12px 2px rgba(177, 177, 177, 0.664);
 }
 .container .buy-ticket .title {
     margin: 30px 0 22px 0;
@@ -245,3 +245,8 @@ li {
     border-bottom: 3px solid #e2d630;
 }
 
+.container .buy-ticket .buy-success .successIcon{
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}

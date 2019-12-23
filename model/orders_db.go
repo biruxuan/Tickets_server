@@ -1,6 +1,11 @@
 package model
 
-import "Tickets_server/utils"
+import (
+	"Tickets_server/utils"
+	"fmt"
+
+	//"fmt"
+)
 
 type Order struct {
 	Order_id   int64
@@ -30,7 +35,6 @@ func DeleteOrderByID(ID int64) error {
 	}
 	return nil
 }
-
 
 //获取全部订单
 func GetAllOrders() ([]*Order, error) {
@@ -67,7 +71,21 @@ func GetAllOrders() ([]*Order, error) {
 	}
 	return orders, nil
 }
-////通过姓名查找订单
-//func CheckOrder(name string) error{
-//	sqlStr:="select order_id from orders_info where "
-//}
+
+//通过姓名查找订单
+func CheckOrder(name string, ticketID int64) int64 {
+	sqlStr := "select order_id from orders_info where name=  ?  and oticket_id= ?"
+	row, err := utils.Db.Query(sqlStr, name, ticketID)
+	if err != nil {
+		fmt.Println(err)
+	}
+	var id int64
+	row.Scan(&id)
+	fmt.Println(id)
+	//if err != nil {
+	//	return nil,err
+	//} else {
+	//	return nil
+	//}
+	return id
+}

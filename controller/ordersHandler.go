@@ -84,17 +84,17 @@ func AddOrder(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == "POST" {
 		//formTicket:=make(map[string]interface{})
-		name:= r.PostFormValue("name")
-		idCard:=r.PostFormValue("id_card")
-		oticketID:=r.PostFormValue("oticket_id")
-		phone:=r.PostFormValue("phone")
+		name := r.PostFormValue("name")
+		idCard := r.PostFormValue("id_card")
+		oticketID := r.PostFormValue("oticket_id")
+		phone := r.PostFormValue("phone")
 
 		//len:=r.ContentLength
 		//formData:=make(map[string]string,len)
 		//_ = json.NewDecoder(r.Body).Decode(formData)
-		ticketID,_:=strconv.ParseInt(oticketID,10,0)
-		iPhone,_:=strconv.ParseInt(phone,10,0)
-		t:=model.Order{
+		ticketID, _ := strconv.ParseInt(oticketID, 10, 0)
+		iPhone, _ := strconv.ParseInt(phone, 10, 0)
+		t := model.Order{
 			//Order_id:   0,
 			Oticket_id: ticketID,
 			Name:       name,
@@ -106,12 +106,20 @@ func AddOrder(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(t.Phone)
 		fmt.Println(t.Oticket_id)
 
-
+		//if model.CheckOrder(t.Name, t.Oticket_id) != nil {
+		//	w.WriteHeader(404)
+		//} else {
 		err := t.AddOrder()
 		if err != nil {
 			fmt.Println("订单插入数据库错误")
+		} else {
+			w.WriteHeader(200)
 		}
-	} else {
-		w.WriteHeader(200)
+		ID := model.CheckOrder(t.Name, t.Oticket_id)
+		fmt.Println(ID)
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(ID)
+
+		//}
 	}
 }
