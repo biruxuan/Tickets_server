@@ -1,0 +1,241 @@
+/* prefixed by https://autoprefixer.github.io (PostCSS: v7.0.23, autoprefixer: v9.7.3) */
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #787c96;
+    font-family: 'Microsoft YaHei';
+}
+
+input {
+    outline: none;
+}
+
+ul,
+li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.container {
+    position: relative;
+    width: 1200px;
+    height: 640px;
+    margin-left: calc(50vw - 600px);
+    margin-top: calc(50vh - 320px);
+    border-radius: 15px;
+    overflow: hidden;
+    -webkit-box-shadow: 0 0 10px 4px rgba(98, 100, 117, 0.548);
+    box-shadow: 0 0 10px 4px rgba(98, 100, 117, 0.548);
+    background-color: #fdfdfd;
+}
+
+
+/* 车票购买盒子模型 */
+
+.container .ticket-list-box {
+    width: 100%;
+    height: 100%;
+    background-color: #fdfdfd;
+}
+
+
+/* 新建车次
+.container .ticket-list-box .new {
+    box-sizing: border-box;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 7%;
+    left: 5%;
+    z-index: 3;
+    text-align: center;
+    cursor: pointer;
+}
+
+.container .ticket-list-box .new {
+    z-index: 1;
+} */
+
+
+/* 车票盒子 */
+
+.container .ticket-list {
+    width: 100%;
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container .ticket-list .title {
+    margin: 30px 0 22px 0;
+    font-size: 32px;
+    text-align: center;
+    font-weight: 500;
+    color: #555870;
+    letter-spacing: 8px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.container .ticket-list ul {
+    width: 100%;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    overflow: hidden;
+}
+
+.container .ticket-list ul li {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 50px;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.container .ticket-list ul li:nth-child(odd) {
+    background-color: #f3f1f1;
+}
+
+.container .ticket-list ul li:first-of-type {
+    background-color: #eeeeee;
+    font-size: 20px;
+    font-weight: 600;
+    border-top: 1px solid #d4d0d0;
+    border-bottom: 1px solid #d4d0d0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    letter-spacing: 1px;
+    /* text-align: center; */
+}
+
+.container .ticket-list ul li:first-of-type:hover {
+    background-color: #eeeeee;
+}
+
+.container .ticket-list ul li:hover {
+    background-color: #ffeae8;
+    border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px;
+}
+
+.container .ticket-list ul li .train-id {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    text-align: center;
+}
+.container .ticket-list ul li .departure-date,
+.container .ticket-list ul li .departure-time,
+.container .ticket-list ul li .start-point,
+.container .ticket-list ul li .end-point,
+.container .ticket-list ul li .travel-time,
+.container .ticket-list ul li .rated-load,
+.container .ticket-list ul li .booked-num {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+
+/* 购买 退票按钮 */
+
+.container .ticket-list ul li .buy,
+.container .ticket-list ul li .refund {
+    /* visibility: hidden; */
+    width: 60px;
+    height: 24px;
+    border: 1px solid #555870;
+    border-radius: 12px;
+    margin-right: 24px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.container .ticket-list ul li .buy:hover,
+.container .ticket-list ul li .refund:hover {
+    background-color: #555870;
+    color: #fcf9f9;
+}
+
+
+/* 底部页面切换盒子 */
+
+.container .ticket-list .turing-page {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+    height: 90px;
+    background-color: #fdfdfd;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+/* 上一页/下一页 */
+
+.container .ticket-list .prev,
+.container .ticket-list .next {
+    width: 100px;
+    height: 36px;
+    border: 1px solid #555870;
+    border-radius: 20px;
+    font-size: 18px;
+    text-align: center;
+    line-height: 36px;
+    cursor: pointer;
+}
+
+.container .ticket-list .prev {
+    color: #555870;
+}
+
+.container .ticket-list .next {
+    background-color: #555870;
+    color: #fcf9f9;
+}

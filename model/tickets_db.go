@@ -6,23 +6,25 @@ import (
 )
 
 type Ticket struct {
-	ticket_id      int
-	departure_time string
-	start_point    string
-	end_point      string
-	travel_time    float32
-	rated_load     int
-	booked_num     int
+	Ticket_id      int64
+	Train_id       string
+	Departure_date string
+	Departure_time string
+	Start_point    string
+	End_point      string
+	Travel_time    float64
+	Rated_load     int64
+	Booked_num     int64
 }
 
-
+//增加一张车票
 func (ticket *Ticket) AddTickets() error {
 	//sql语句
-	sqlStr := "insert into tickets_info(ticket_id,departure_time,start_point,end_point,travel_time," +
-		"rated_load,booked_num) values(?,?,?,?,?,?,?)"
+	sqlStr := "insert into tickets_info(ticket_id,train_id,departure_date,departure_time,Start_point,end_point,travel_time," +
+		"rated_load,booked_num) values(?,?,?,?,?,?,?,?,?)"
 	//执行
-	_, err := utils.Db.Exec(sqlStr, ticket.ticket_id, ticket.departure_time, ticket.start_point, ticket.end_point,
-		ticket.travel_time, ticket.rated_load, ticket.booked_num)
+	_, err := utils.Db.Exec(sqlStr, ticket.Ticket_id, ticket.Train_id, ticket.Departure_date, ticket.Departure_time, ticket.Start_point, ticket.End_point,
+		ticket.Travel_time, ticket.Rated_load, ticket.Booked_num)
 	if err != nil {
 		fmt.Println("数据库插入错误", err.Error())
 		return err
@@ -30,19 +32,22 @@ func (ticket *Ticket) AddTickets() error {
 	return nil
 }
 
+//通过车次查询车票
 func (ticket *Ticket) GetTicketByID() (*Ticket, error) {
 	sqlStr := "select * from tickets_info where ticket_id=?"
-	row := utils.Db.QueryRow(sqlStr, ticket.ticket_id)
+	row := utils.Db.QueryRow(sqlStr, ticket.Ticket_id)
 	var (
-		ticket_id      int
+		ticket_id      int64
+		train_id       string
+		departure_date string
 		departure_time string
 		start_point    string
 		end_point      string
-		travel_time    float32
-		rated_load     int
-		booked_num     int
+		travel_time    float64
+		rated_load     int64
+		booked_num     int64
 	)
-	err := row.Scan(&ticket_id, &departure_time, &start_point, &end_point, &travel_time,
+	err := row.Scan(&ticket_id, &train_id, &departure_date, &departure_time, &start_point, &end_point, &travel_time,
 		&rated_load, &booked_num)
 	if err != nil {
 		fmt.Println("通过ID查询错误")
@@ -50,19 +55,25 @@ func (ticket *Ticket) GetTicketByID() (*Ticket, error) {
 	}
 
 	t := &Ticket{
-		ticket_id:      ticket_id,
-		departure_time: departure_time,
-		start_point:    start_point,
-		end_point:      end_point,
-		travel_time:    travel_time,
-		rated_load:     rated_load,
-		booked_num:     booked_num,
+		Ticket_id:      ticket_id,
+		Train_id:       train_id,
+		Departure_date: departure_date,
+		Departure_time: departure_time,
+		Start_point:    start_point,
+		End_point:      end_point,
+		Travel_time:    travel_time,
+		Rated_load:     rated_load,
+		Booked_num:     booked_num,
 	}
 	return t, nil
 }
 
+//获取全部车票
 func GetAllTickets() ([]*Ticket, error) {
+//func GetAllTickets(str string) ([]*Ticket, error) {
 	sqlStr := "select * from tickets_info where 1"
+	//sqlStr := "select * from tickets_info where "+str
+
 	rows, err := utils.Db.Query(sqlStr)
 	if err != nil {
 		return nil, err
@@ -71,29 +82,60 @@ func GetAllTickets() ([]*Ticket, error) {
 	var tickets []*Ticket
 	for rows.Next() {
 		var (
-			ticket_id      int
-			departure_time string
-			start_point    string
-			end_point      string
-			travel_time    float32
-			rated_load     int
-			booked_num     int
+			ticketId      int64
+			trainId       string
+			departureDate string
+			departureTime string
+			startPoint    string
+			endPoint      string
+			travelTime    float64
+			ratedLoad     int64
+			bookedNum     int64
 		)
-		err2 := rows.Scan(&ticket_id, &departure_time, &start_point, &end_point, &travel_time,
-			&rated_load, &booked_num)
+		err2 := rows.Scan(&ticketId, &trainId, &departureDate, &departureTime, &startPoint, &endPoint, &travelTime,
+			&ratedLoad, &bookedNum)
 		if err2 != nil {
 			return nil, err2
 		}
 		t := &Ticket{
-			ticket_id:      ticket_id,
-			departure_time: departure_time,
-			start_point:    start_point,
-			end_point:      end_point,
-			travel_time:    travel_time,
-			rated_load:     rated_load,
-			booked_num:     booked_num,
+			Ticket_id:      ticketId,
+			Train_id:       trainId,
+			Departure_date: departureDate,
+			Departure_time: departureTime,
+			Start_point:    startPoint,
+			End_point:      endPoint,
+			Travel_time:    travelTime,
+			Rated_load:     ratedLoad,
+			Booked_num:     bookedNum,
 		}
 		tickets = append(tickets, t)
 	}
 	return tickets, nil
+}
+
+//删除一张车票
+func DeleteTicketByID(ID int64) error {
+	sqlStr := "delete from tickets_info where ticket_id = ?"
+	_, err := utils.Db.Exec(sqlStr, ID)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+//修改已定车票
+func UpdateTicketBookedNum(ID int64, status string) error {
+	var sqlStr string
+	if status == "refund" {
+		//退票
+		sqlStr = "update tickets_info set booked_num = booked_num-1  where ticket_id =?"
+	} else if status == "sold" {
+		//售票
+		sqlStr = "update tickets_info set booked_num = booked_num+1  where ticket_id =?"
+	}
+	_, err := utils.Db.Exec(sqlStr, ID)
+	if err != nil {
+		return err
+	}
+	return nil
 }
