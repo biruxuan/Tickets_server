@@ -19,9 +19,9 @@ li {
 .container {
     position: relative;
     width: 1200px;
-    height: 640px;
+    height: 636px;
     margin-left: calc(50vw - 600px);
-    margin-top: calc(50vh - 320px);
+    margin-top: calc(50vh - 318px);
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 0 10px 4px rgba(98, 100, 117, 0.548);
@@ -29,8 +29,10 @@ li {
 }
 
 
-/* 车票购买盒子 */
+/*---------------   车次列表盒子   ---------------*/
 .container .ticket-list {
+    position: absolute;
+    z-index: 1;
     width: 100%;
     height: 100%;
     display: flex;
@@ -39,6 +41,7 @@ li {
     align-items: center;
     background-color: #fdfdfd;
     overflow: hidden;
+    animation: 1s;
 }
 /* 标题 */
 .container .ticket-list .title {
@@ -74,12 +77,6 @@ li {
     text-overflow: ellipsis;
     text-align: center;
 }
-
-.container .ticket-list ul li:hover {
-    background-color: #ffeae8;
-    border-top-right-radius: 9px;
-    border-bottom-right-radius: 9px;
-}
 /* 购买按钮 */
 .container .ticket-list ul li .buy {
     max-width: 90px;
@@ -99,7 +96,12 @@ li {
 .container .ticket-list ul li:nth-child(odd) {
     background-color: #f3f1f1;
 }
-
+/* 鼠标滑动 */
+.container .ticket-list ul li:hover {
+    background-color: #ffeae8;
+    border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px;
+}
 /* 第一列表头显示 */
 .container .ticket-list ul li:first-of-type {
     background-color: #eeeeee;
@@ -125,7 +127,8 @@ li {
 
 /* 底部页面切换盒子 */
 
-.container .ticket-list .turing-page {
+.container .ticket-list .turing-page,
+.container .buy-ticket-box .change {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -135,26 +138,95 @@ li {
     user-select: none;
 }
 
-
 /* 上一页/下一页 */
-
 .container .ticket-list .prev,
-.container .ticket-list .next {
+.container .ticket-list .next,
+.container .buy-ticket-box .cancel,
+.container .buy-ticket-box .buy {
     width: 100px;
     height: 36px;
     border: 1px solid #555870;
     border-radius: 20px;
+    background-color: #fdfdfd;
     font-size: 18px;
     text-align: center;
     line-height: 36px;
     cursor: pointer;
 }
 
-.container .ticket-list .prev {
+
+
+/*---------------  信息填写界面  ---------------*/
+.container .unselect {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+}
+.container .buy-ticket-box {
+    position: absolute;
+    z-index: 3;
+    width: 50%;
+    height: 80%;
+    top: 10%;
+    left: 25%;
+    border-radius: 25px;
+    background-color: #fdfdfd;
+    box-shadow: 0 0 12px 2px rgba(177, 177, 177, 0.664);
+}
+.container .buy-ticket {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.container .buy-ticket .title {
+    margin: 30px 0 22px 0;
+    font-size: 28px;
+    text-align: center;
+    font-weight: 500;
     color: #555870;
+    letter-spacing: 8px;
+    user-select: none;
+}
+.contianer .buy-ticket .buy-ticket {
+    flex: 1;
+}
+.container .buy-ticket .input-box label {
+    display: inline-block;
+    width: 80px;
+    height: 21px;
+    margin-bottom: -3px;
+    line-height: 21px;
+    font-size: 18px;
+    text-align: justify;
+    color: #595b79;
+    user-select: none;
+    overflow: hidden;
+ }
+.container .buy-ticket .input-box label:after {
+        content:'';
+        width: 100%;
+        display: inline-block;
+        overflow: hidden;
+        height: 0;
 }
 
-.container .ticket-list .next {
-    background-color: #555870;
-    color: #fcf9f9;
+.container .buy-ticket .input-box input {
+    height: 32px;
+    width: 250px;
+    padding-left: 7px;
+    font-size: 20px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 3px solid #a8acc5;
+    background-color: transparent;
+    margin: 15px 10px;
 }
+.container .buy-ticket .input-box input:focus {
+    border-bottom: 3px solid #e2d630;
+}
+

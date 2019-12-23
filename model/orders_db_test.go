@@ -12,18 +12,21 @@ import (
 
 func TestOrder_AddOrder(t *testing.T) {
 	order := Order{
-		Order_id:   3,
-		Oticket_id: 4,
+		//Order_id:   3,
+		Oticket_id: 12,
 		Name:       "张三",
 		Id_card:    "37232319990101123X",
 		Phone:      12345678910,
 	}
-	_ = order.AddOrder()
+	err:= order.AddOrder()
+	if err!=nil{
+		fmt.Println(err)
+	}
 }
 
-func TestDeleteOrderByID(t *testing.T) {
-	_=DeleteOrderByID(4)
-}
+//func TestDeleteOrderByID(t *testing.T) {
+//	_=DeleteOrderByID(4)
+//}
 
 func TestGetAllOrders(t *testing.T) {
 	orders, _ := GetAllOrders()

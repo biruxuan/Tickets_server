@@ -1,9 +1,7 @@
 package model
 
 import (
-	"encoding/json"
 	"fmt"
-	"log"
 	"testing"
 )
 
@@ -20,23 +18,23 @@ import (
 //	m.Run("TestTicket_GetTicketByID",TestTicket_GetTicketByID)
 //}
 
-//func TestTicket_AddTickets(t *testing.T) {
-//	ticket := &Ticket{
-//		Ticket_id:      14,
-//		Train_id:       "Z104",
-//		Departure_date: "2019-12-24 ",
-//		Departure_time: "16:20:00",
-//		Start_point:    "青岛",
-//		End_point:      "北京",
-//		Travel_time:    5,
-//		Rated_load:     50,
-//		Booked_num:     15,
-//	}
-//	err := ticket.AddTickets()
-//	if err != nil {
-//		fmt.Println("Error")
-//	}
-//}
+func TestTicket_AddTickets(t *testing.T) {
+	ticket := &Ticket{
+		//Ticket_id:      14,
+		Train_id:       "Z104",
+		Departure_date: "2019-12-24 ",
+		Departure_time: "16:20:00",
+		Start_point:    "青岛",
+		End_point:      "北京",
+		Travel_time:    5,
+		Rated_load:     50,
+		Booked_num:     15,
+	}
+	err := ticket.AddTickets()
+	if err != nil {
+		fmt.Println("Error")
+	}
+}
 
 //}
 //
@@ -75,11 +73,11 @@ import (
 //}
 
 
-func Test(t *testing.T){
-str:="[{\"Ticket_id\":1,\"Train_id\":\"Z101\"},{\"Ticket_id\":2,\"Train_id\":\"Z102\"}]"
-	//初始化请求变量结构
-	formTickets:=make(map[string]interface{})
-	//调用json包的解析，解析请求Body
-	json.Unmarshal([]byte(str),&formTickets)
-	fmt.Printf("%#v\n", formTickets)
-}
+//func Test(t *testing.T){
+//str:="[{\"Ticket_id\":1,\"Train_id\":\"Z101\"},{\"Ticket_id\":2,\"Train_id\":\"Z102\"}]"
+//	//初始化请求变量结构
+//	formTickets:=make(map[string]interface{})
+//	//调用json包的解析，解析请求Body
+//	json.Unmarshal([]byte(str),&formTickets)
+//	fmt.Printf("%#v\n", formTickets)
+//}

@@ -33,6 +33,8 @@ func GetAllOrderss(w http.ResponseWriter, r *http.Request) {
 func DeleteOrder(w http.ResponseWriter, r *http.Request) {
 	//获取要修改的班次
 	order_id := r.PostFormValue("ticket_id")
+	//formData=
+	//json.NewDecoder(r.Body).Decode(&formData)
 	//进行类型转换
 	iOrderID, _ := strconv.ParseInt(order_id, 10, 0)
 	err := model.DeleteTicketByID(iOrderID)
@@ -46,49 +48,70 @@ func DeleteOrder(w http.ResponseWriter, r *http.Request) {
 
 //增加一个订单
 func AddOrder(w http.ResponseWriter, r *http.Request) {
+	//name := r.PostFormValue("name")
+	//idCard := r.PostFormValue("id_card")
+	//phone := r.PostFormValue("phone")
+	//fmt.Println(r.Form["id_card"])
+	//fmt.Println(r.Form["phone"])
 	//ticketID := r.PostFormValue("Ticket_id")
-	//trainID := r.PostFormValue("Train_id")
-	//departureDate := r.PostFormValue("Departure_Date")
-	//departureTime := r.PostFormValue("Departure_time")
-	//startPoint := r.PostFormValue("start_point")
-	//endPoint := r.PostFormValue("End_point")
-	//travelTime := r.PostFormValue("Travel_time")
-	//ratedLoad := r.PostFormValue("Rated_load")
-	//bookedNum := r.PostFormValue("Booked_num")
-	////类型转换
-	//iticketID, _ := strconv.ParseInt(ticketID, 10, 0)
+	//name := r.PostFormValue("name")
+	//id_card := r.PostFormValue("id_card")
+	//phone := r.PostFormValue("phone")
+	//类型转换
+	//fmt.Println(name)
+	//fmt.Println(idCard)
+	//fmt.Println(phone)
+
+	//iPhone, _ := strconv.ParseInt(phone, 10, 0)
 	//iratedLoad, _ := strconv.ParseInt(ratedLoad, 10, 0)
 	//ibookedNun, _ := strconv.ParseInt(bookedNum, 10, 0)
 	//ftravelTime, _ := strconv.ParseFloat(travelTime, 32)
-	//
-	//ticket := model.Ticket{
-	//	Ticket_id:      iticketID,
-	//	Train_id:       trainID,
-	//	Departure_date: departureDate,
-	//	Departure_time: departureTime,
-	//	Start_point:    startPoint,
-	//	End_point:      endPoint,
-	//	Travel_time:    ftravelTime,
-	//	Rated_load:     iratedLoad,
-	//	Booked_num:     ibookedNun,
+
+	//order := model.Order{
+	//	//Order_id:   13,
+	//	Oticket_id: 14,
+	//	Name:       name,
+	//	Id_card:    idCard,
+	//	Phone:      iPhone,
 	//}
-	//err := ticket.AddTickets()
+	//err := order.AddOrder()
 	//if err != nil {
 	//	//fmt.Fprint(w, 404)
 	//	w.WriteHeader(404)
 	//
 	//}
 	//w.WriteHeader(200)
-	_ = r.ParseForm()
+
 	if r.Method == "POST" {
 		//formTicket:=make(map[string]interface{})
-		t := model.Ticket{}
-		_ = json.NewDecoder(r.Body).Decode(t)
-		err := t.AddTickets()
+		name:= r.PostFormValue("name")
+		id_card:=r.PostFormValue("id_card")
+		oticket_id:=r.PostFormValue("oticket_id")
+		phone:=r.PostFormValue("phone")
+
+		//len:=r.ContentLength
+		//formData:=make(map[string]string,len)
+		//_ = json.NewDecoder(r.Body).Decode(formData)
+		ticketId,_:=strconv.ParseInt(oticket_id,10,0)
+		iPhone,_:=strconv.ParseInt(phone,10,0)
+		t:=model.Order{
+			//Order_id:   0,
+			Oticket_id: ticketId,
+			Name:       name,
+			Id_card:    id_card,
+			Phone:      iPhone,
+		}
+		fmt.Println(t.Name)
+		fmt.Println(t.Id_card)
+		fmt.Println(t.Phone)
+		fmt.Println(t.Oticket_id)
+
+
+		err := t.AddOrder()
 		if err != nil {
 			fmt.Println("订单插入数据库错误")
 		}
 	} else {
-		w.WriteHeader(404)
+		w.WriteHeader(200)
 	}
 }

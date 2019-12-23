@@ -10,13 +10,13 @@ func main() {
 	http.Handle("/view/",http.StripPrefix("/view/",http.FileServer(http.Dir("./view/"))))
 //车票部分
 	http.HandleFunc("/index", controller.Indexhandler)
-	http.HandleFunc("/", controller.Indexhandler)
+	//http.HandleFunc("/", controller.Indexhandler)
 	http.HandleFunc("/addTicket", controller.AddTicket)
 	http.HandleFunc("/allTickets", controller.GetAllTickets)
 	http.HandleFunc("/update", controller.UpdateTicketBooked)
 	http.HandleFunc("/delete", controller.DeleteTicket)
 //订单部分
-	http.HandleFunc("/addOrder", controller.AddOrder)
+	http.HandleFunc("/buyticket", controller.AddOrder)
 	http.HandleFunc("/deleteOrder", controller.DeleteOrder)
 	http.HandleFunc("/allOrders", controller.GetAllOrderss)
 	//http.HandleFunc("/update", controller.UpdateTicketBooked)

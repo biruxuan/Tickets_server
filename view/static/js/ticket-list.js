@@ -31,7 +31,7 @@
                 ${ticket.Departure_time}</div><div class="start-point">${ticket.Start_point}</div>
                 <div class="end-point">${ticket.End_point}</div><div class="travel-time">
                 ${ticket.Travel_time}</div><div class="rated-load">${ticket.Rated_load}</div>
-                <div class="booked-num">${ticket.Booked_num}</div><div class="buy">购买</div>`)
+                <div class="booked-num">${ticket.Booked_num}</div><div id="buy" class="buy">购买</div>`)
                 .attr('ticket-id', ticket.Ticket_id);
                 return $li;
             })
@@ -39,14 +39,6 @@
                 this.$el.find('ul').append(li);
             })
         },
-        // show() {
-        //     this.$el.css("z-index", '2');
-        //     this.$el.fadeIn('fast');
-        // },
-        // hide() {
-        //     this.$el.css("z-index", '-1');
-        //     this.$el.fadeOut('fast');
-        // },
         toPage(nowPage, allPage) {
             this.$el.find('#pages').html(`${nowPage} / ${allPage}`);
         }
@@ -67,23 +59,6 @@
                 }
                 return response;
             })
-            // let ticketsRequest = new XMLHttpRequest();
-            // ticketsRequest.open("GET", "/alltickets");
-            // ticketsRequest.send();
-            // ticketsRequest.onreadystatechange = ()=> {
-            //         if (ticketsRequest.readyState === 4 && ticketsRequest.status === 200) {
-            //             this.data.tickets = ticketsRequest.responseText;
-            //             console.log(this.data);
-            //             this.data.allPage = parseInt((this.data.tickets.length - 1) / 8) + 1;
-            //             if (this.data.nowPage > this.data.allPage) {
-            //                 this.data.nowPage = this.data.allPage;
-            //             }
-            //             return true;
-            //         } else if (ticketsRequest.readyState === 4 && ticketsRequest.status === 404) {
-            //             console.log('读取失败');
-            //         }
-            //     }
-                // this.data.tickets = testData;
 
         },
         toPage(allLi, pagedNum) {
@@ -145,8 +120,9 @@ let controller = {
                 this.toPage('prev');
             })
 
-            this.view.$el.on('hover', '#li', (e) => {
-
+            this.view.$el.on('click', '#buy', (e) => {
+                let ticketId = $(e.currentTarget).parent().attr('ticket-id');
+                window.eventHub.emit('buyTicket', ticketId);
             })
         },
     }
