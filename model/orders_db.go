@@ -67,3 +67,7 @@ func GetAllOrders() ([]*Order, error) {
 	}
 	return orders, nil
 }
+////通过姓名查找订单
+//func CheckOrder(name string) error{
+//	sqlStr:="select order_id from orders_info where "
+//}

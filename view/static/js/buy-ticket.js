@@ -3,26 +3,26 @@
         el: '#buy-ticket-box',
         template: `
         <form class="buy-ticket" method="post">
-        <div class="title">购买车票</div>
-        <div class="input-box">
-            <div>
-                <label for="">姓名</label>
-                <input type="text" autocomplete="off" name="name" value="__name__">
+            <div id="title" class="title">购买车票</div>
+            <div class="input-box">
+                <div>
+                    <label for="">姓名</label>
+                    <input type="text" autocomplete="off" name="name" value="__name__">
+                </div>
+                <div>
+                    <label for="">身份证号</label>
+                    <input type="text" autocomplete="off" name="id_card" value="__id_card__">
+                </div>
+                <div>
+                    <label for="">手机号</label>
+                    <input type="text" autocomplete="off" name="phone" value="__phone__">
+                </div>
             </div>
-            <div>
-                <label for="">身份证号</label>
-                <input type="text" autocomplete="off" name="id_card" value="__id_card__">
+            <div class="change">
+                <div class="cancel" id="cancel">取消</div>
+                <input type="submit" class="buy" value="购买">
             </div>
-            <div>
-                <label for="">手机号</label>
-                <input type="text" autocomplete="off" name="phone" value="__phone__">
-            </div>
-        </div>
-        <div class="change">
-            <div class="cancel" id="cancel">取消</div>
-            <input type="submit" class="buy" value="购买">
-        </div>
-    </form>
+        </form>
         `,
         init() {
             this.$el = $(this.el);
@@ -40,11 +40,19 @@
             $('#unselect').show();
             this.$el.show();
         },
+        showSuccess() {
+            this.$el.find('#title').html('购买成功');
+
+        },
+        showError() {
+
+        },
         hide() {
             $('#ticket-list').css('filter', 'blur(0px)');
             $('#unselect').hide();
             this.$el.hide();
         }
+
     }
 
     let model = {

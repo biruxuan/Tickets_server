@@ -3,6 +3,7 @@
         el: '#ticket-list',
         template: `
             <div class="title">车票购买系统</div>
+            <div id="now-time" class="now-time"></div>
             <ul>
             <li>
                 <div class="train-id">班次</div><div class="departure-date">日期</div>
@@ -41,6 +42,9 @@
         },
         toPage(nowPage, allPage) {
             this.$el.find('#pages').html(`${nowPage} / ${allPage}`);
+        },
+        setNowTime(time) {
+            this.$el.find('#now-time').html(time);
         }
     }
 
@@ -48,7 +52,8 @@
         data: {
             tickets: [],
             nowPage: 1,
-            allPage: 1
+            allPage: 1,
+            time: ''
         },
         getTickets() {
             return $.get('/allTickets').then((response)=> {
@@ -61,6 +66,13 @@
             })
 
         },
+        getNowTime() {
+            let nowTime = new Date();
+            let hour = nowTime.getHours() > 9 ? nowTime.getHours() : '0' + nowTime.getHours();
+            let minute = nowTime.getMinutes() > 9 ? nowTime.getMinutes() : '0' + nowTime.getMinutes();
+            let second = nowTime.getSeconds() > 9 ? nowTime.getSeconds() : '0' + nowTime.getSeconds();
+            this.data.time = `${nowTime.getFullYear()}-${nowTime.getMonth()+1}-${nowTime.getDate()} ${hour}:${minute}:${second}`;
+        },
         toPage(allLi, pagedNum) {
             let allPageNum = this.data.allPage;
             if (1 <= pagedNum && pagedNum <= allPageNum) {
@@ -72,20 +84,20 @@
                     }
                 }
                 this.data.nowPage = pagedNum;
-}
-}
-}
+            }
+        }
+    }
 let controller = {
         init(view, model) {
             this.view = view;
             this.model = model;
             this.view.init();
-            // this.view.render({});
-            this.model.getTickets().then(()=>{
+            this.view.render({});
+            this.model.getTickets().then(() => {
                    this.view.render(this.model.data);
-                })
-
+                });
             this.bindEvents();
+            this.getNowTime();
         },
         toPage(status) {
             let nowPage = this.model.data.nowPage;
@@ -110,6 +122,12 @@ let controller = {
 
             this.model.toPage(allLi, nowPage + addPageNum);
             this.view.toPage(this.model.data.nowPage, allPage);
+        },
+        getNowTime() {
+            setInterval(() => {
+                this.model.getNowTime();
+                this.view.setNowTime(this.model.data.time);
+            }, 500);
         },
         bindEvents() {
             this.view.$el.on('click', '#next', () => { //跳转到下一页

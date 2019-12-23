@@ -85,20 +85,20 @@ func AddOrder(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		//formTicket:=make(map[string]interface{})
 		name:= r.PostFormValue("name")
-		id_card:=r.PostFormValue("id_card")
-		oticket_id:=r.PostFormValue("oticket_id")
+		idCard:=r.PostFormValue("id_card")
+		oticketID:=r.PostFormValue("oticket_id")
 		phone:=r.PostFormValue("phone")
 
 		//len:=r.ContentLength
 		//formData:=make(map[string]string,len)
 		//_ = json.NewDecoder(r.Body).Decode(formData)
-		ticketId,_:=strconv.ParseInt(oticket_id,10,0)
+		ticketID,_:=strconv.ParseInt(oticketID,10,0)
 		iPhone,_:=strconv.ParseInt(phone,10,0)
 		t:=model.Order{
 			//Order_id:   0,
-			Oticket_id: ticketId,
+			Oticket_id: ticketID,
 			Name:       name,
-			Id_card:    id_card,
+			Id_card:    idCard,
 			Phone:      iPhone,
 		}
 		fmt.Println(t.Name)

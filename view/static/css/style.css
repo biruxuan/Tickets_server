@@ -54,6 +54,17 @@ li {
     user-select: none;
 }
 
+.container .ticket-list .now-time {
+    position: absolute;
+    z-index: 2;
+    top: 42px;
+    left: 120px;
+    width: 250px;
+    height: 30px;
+    font-size: 18px;
+    color: #616683;
+}
+
 .container .ticket-list ul {
     width: 100%;
     flex: 1;
@@ -88,7 +99,11 @@ li {
     cursor: pointer;
 }
 
-.container .ticket-list ul li .buy:hover {
+.container .ticket-list ul li .buy:hover,
+.container .ticket-list .prev:hover,
+.container .ticket-list .next:hover,
+.container .buy-ticket-box .cancel:hover,
+.container .buy-ticket-box .buy:hover {
     background-color: #555870;
     color: #fcf9f9;
 }
@@ -155,7 +170,6 @@ li {
 }
 
 
-
 /*---------------  信息填写界面  ---------------*/
 .container .unselect {
     position: absolute;
@@ -191,6 +205,7 @@ li {
     letter-spacing: 8px;
     user-select: none;
 }
+
 .contianer .buy-ticket .buy-ticket {
     flex: 1;
 }
