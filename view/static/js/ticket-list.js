@@ -1,23 +1,21 @@
 {
     let view = {
-        el: '#ticket-list-box',
+        el: '#ticket-list',
         template: `
-        <div class="ticket-list">
             <div class="title">车票购买系统</div>
             <ul>
             <li>
-                <div class="ticket-id">班次</div><div class="departure-date">日期</div>
+                <div class="train-id">班次</div><div class="departure-date">日期</div>
                 <div class="departure-time">时间</div><div class="start-point">起点</div>
                 <div class="end-point">终点</div><div class="travel-time">车程</div>
                 <div class="rated-load">总票数</div><div class="booked-num">已售</div>
-                <div class="buy">购买</div><div class="refund">退票</div>
+                <div class="buy"></div>
             </ul>
             <div class="turing-page">
                 <div class="prev" id="prev">上一页</div>
                 <div class="pages" id="pages">__nowPage__ / __allPage__</div>
                 <div class="next" id="next">下一页</div>
             </div>
-        </div>
         `,
         init() {
             this.$el = $(this.el);
@@ -33,8 +31,8 @@
                 ${ticket.Departure_time}</div><div class="start-point">${ticket.Start_point}</div>
                 <div class="end-point">${ticket.End_point}</div><div class="travel-time">
                 ${ticket.Travel_time}</div><div class="rated-load">${ticket.Rated_load}</div>
-                <div class="booked-num">${ticket.Booked_num}</div><div class="buy">购买</div>
-                <div class="refund">退票</div>`).attr('ticket-id', ticket.Ticket_id);
+                <div class="booked-num">${ticket.Booked_num}</div><div class="buy">购买</div>`)
+                .attr('ticket-id', ticket.Ticket_id);
                 return $li;
             })
             liList.map((li, i) => {
@@ -61,7 +59,7 @@
             allPage: 1
         },
         getTickets() {
-            return $.get('/alltickets').then((response)=> {
+            return $.get('/allTickets').then((response)=> {
                 this.data.tickets = response;
                 this.data.allPage = parseInt((this.data.tickets.length - 1) / 8) + 1;
                 if (this.data.nowPage > this.data.allPage) {

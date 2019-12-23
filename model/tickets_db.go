@@ -70,7 +70,7 @@ func (ticket *Ticket) GetTicketByID() (*Ticket, error) {
 
 //获取全部车票
 func GetAllTickets() ([]*Ticket, error) {
-//func GetAllTickets(str string) ([]*Ticket, error) {
+	//func GetAllTickets(str string) ([]*Ticket, error) {
 	sqlStr := "select * from tickets_info where 1"
 	//sqlStr := "select * from tickets_info where "+str
 
@@ -124,7 +124,7 @@ func DeleteTicketByID(ID int64) error {
 }
 
 //修改已定车票
-func UpdateTicketBookedNum(ID int64, status string) error {
+func UpdateTicketBookedNum(ID int64, status string) (map[string]int64, error) {
 	var sqlStr string
 	if status == "refund" {
 		//退票
@@ -133,9 +133,20 @@ func UpdateTicketBookedNum(ID int64, status string) error {
 		//售票
 		sqlStr = "update tickets_info set booked_num = booked_num+1  where ticket_id =?"
 	}
+
 	_, err := utils.Db.Exec(sqlStr, ID)
 	if err != nil {
-		return err
+		return nil,err
 	}
-	return nil
+
+	sqlQueryrow := "select booked_num from tickets_info where ticket_id = ?"
+	row := utils.Db.QueryRow(sqlQueryrow, ID)
+	var b_n int64
+	err2:=row.Scan(&b_n)
+	if err2 != nil {
+		return nil,err2
+	}
+	num:=make(map[string]int64)
+	num["Booked_num"]=b_n
+	return num, nil
 }

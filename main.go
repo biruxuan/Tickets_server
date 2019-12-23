@@ -8,20 +8,18 @@ import (
 func main() {
 	//静态资源管理
 	http.Handle("/view/",http.StripPrefix("/view/",http.FileServer(http.Dir("./view/"))))
-	//增加车票
-	//http.HandleFunc()
-	//购买车票
-	//退票
-	//查看全部车票
+//车票部分
 	http.HandleFunc("/index", controller.Indexhandler)
 	http.HandleFunc("/", controller.Indexhandler)
-
-	//http.HandleFunc("/index/", controller.Datahandler)
-
-	http.HandleFunc("/addticket", controller.AddTicket)
-	http.HandleFunc("/alltickets", controller.GetAllTickets)
+	http.HandleFunc("/addTicket", controller.AddTicket)
+	http.HandleFunc("/allTickets", controller.GetAllTickets)
 	http.HandleFunc("/update", controller.UpdateTicketBooked)
 	http.HandleFunc("/delete", controller.DeleteTicket)
+//订单部分
+	http.HandleFunc("/addOrder", controller.AddOrder)
+	http.HandleFunc("/deleteOrder", controller.DeleteOrder)
+	http.HandleFunc("/allOrders", controller.GetAllOrderss)
+	//http.HandleFunc("/update", controller.UpdateTicketBooked)
 
 	//h:=http.FileServer(http.Dir("./view/static"))
 	http.ListenAndServe(":8080", nil)
