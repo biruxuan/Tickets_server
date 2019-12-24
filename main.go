@@ -18,7 +18,7 @@ func main() {
 //订单部分
 	http.HandleFunc("/buyticket", controller.AddOrder)
 	http.HandleFunc("/deleteOrder", controller.DeleteOrder)
-	http.HandleFunc("/allOrders", controller.GetAllOrderss)
+	http.HandleFunc("/queryticket", controller.GetAllOrderss)
 	//http.HandleFunc("/update", controller.UpdateTicketBooked)
 
 	//h:=http.FileServer(http.Dir("./view/static"))

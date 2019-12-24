@@ -125,6 +125,8 @@ func GetAllTickets(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+
+
 //删除一张车票
 func DeleteTicket(w http.ResponseWriter, r *http.Request) {
 	//获取要修改的班次

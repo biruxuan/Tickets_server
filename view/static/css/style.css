@@ -41,7 +41,6 @@ li {
     align-items: center;
     background-color: #fdfdfd;
     overflow: hidden;
-    animation: 1s;
 }
 /* 标题 */
 .container .ticket-list .title {
@@ -56,13 +55,30 @@ li {
 
 .container .ticket-list .now-time {
     position: absolute;
-    z-index: 2;
-    top: 42px;
+    z-index: 1;
+    top: 48px;
     left: 120px;
     width: 250px;
     height: 30px;
     font-size: 18px;
     color: #616683;
+}
+.container .ticket-list .query-order {
+    position: absolute;
+    z-index: 1;
+    top: 42px;
+    right: 120px;
+    width: 100px;
+    height: 28px;
+    border: 1px solid #555870;
+    border-radius: 14px;
+    line-height: 28px;
+    text-align: center;
+    cursor: pointer;
+}
+.container .ticket-list .query-order:hover {
+    background-color: #696f9b;
+    color: #fcf9f9;
 }
 
 .container .ticket-list ul {
@@ -88,25 +104,7 @@ li {
     text-overflow: ellipsis;
     text-align: center;
 }
-/* 购买按钮 */
-.container .ticket-list ul li .buy {
-    max-width: 90px;
-    height: 24px;
-    border: 1px solid #555870;
-    border-radius: 12px;
-    margin-right: 24px;
-    text-align: center;
-    cursor: pointer;
-}
 
-.container .ticket-list ul li .buy:hover,
-.container .ticket-list .prev:hover,
-.container .ticket-list .next:hover,
-.container .buy-ticket-box .cancel:hover,
-.container .buy-ticket-box .buy:hover {
-    background-color: #555870;
-    color: #fcf9f9;
-}
 /* 奇数行背景 */
 .container .ticket-list ul li:nth-child(odd) {
     background-color: #f3f1f1;
@@ -128,22 +126,32 @@ li {
     letter-spacing: 1px;
     /* text-align: center; */
 }
-.container .ticket-list ul li:first-of-type .buy {
-    border: 0;
-    cursor: default;
-}
-.container .ticket-list ul li:first-of-type .buy:hover {
-    background-color: transparent;
-}
 
 .container .ticket-list ul li:first-of-type:hover {
     background-color: #eeeeee;
 }
+/* 购买按钮 */
+.container .ticket-list ul li .buy {
+    max-width: 90px;
+    height: 24px;
+    border: 1px solid #555870;
+    border-radius: 12px;
+    margin-right: 24px;
+    text-align: center;
+    cursor: pointer;
+}
+.container .ticket-list ul li .buy.time-out {
+    background-color: #cf8892;
+    color: #fcf9f9;
+    cursor: default;
+}
 
-/* 底部页面切换盒子 */
+
+/*-------------- 底部页面切换盒子   -------------- */
 
 .container .ticket-list .turing-page,
-.container .buy-ticket-box .change {
+.container .buy-ticket .change,
+.container .query-ticket .change {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -151,13 +159,16 @@ li {
     height: 90px;
     background-color: #fdfdfd;
     user-select: none;
+    border-radius: 25px;
 }
 
-/* 上一页/下一页 */
+/* 上一页/下一页 取消 购买 */
 .container .ticket-list .prev,
 .container .ticket-list .next,
-.container .buy-ticket-box .cancel,
-.container .buy-ticket-box .buy {
+.container .buy-ticket .cancel,
+.container .buy-ticket .buy,
+.container .query-ticket .cancel,
+.container .query-ticket .query-button {
     width: 100px;
     height: 36px;
     border: 1px solid #555870;
@@ -169,6 +180,29 @@ li {
     cursor: pointer;
 }
 
+.container .ticket-list ul li .buy:hover,
+.container .ticket-list .prev:hover,
+.container .ticket-list .next:hover,
+.container .buy-ticket .cancel:hover,
+.container .buy-ticket .buy:hover,
+.container .query-ticket .cancel:hover,
+.container .query-ticket .query-button:hover {
+    background-color: #696f9b;
+    color: #fcf9f9;
+}
+/* 第一列右侧购买隐藏 */
+.container .ticket-list ul li:first-of-type .buy {
+    border: 0;
+    cursor: default;
+}
+.container .ticket-list ul li:first-of-type .buy:hover {
+    background-color: transparent;
+}
+.container .ticket-list ul li .buy.time-out:hover {
+    background-color: #cf8892;
+    color: #fcf9f9;
+
+}
 
 /*---------------  信息填写界面  ---------------*/
 .container .unselect {
@@ -177,26 +211,30 @@ li {
     width: 100%;
     height: 100%;
 }
-.container .buy-ticket-box {
+.container .buy-ticket-box,
+.container .query-ticket-box {
     position: absolute;
     z-index: 3;
     width: 50%;
     height: 80%;
     top: 10%;
     left: 25%;
+    border-radius: 25px;
+    background-color: #fdfdfdee;
+    box-shadow: 0 0 12px 2px rgba(177, 177, 177, 0.664);
 }
-.container .buy-ticket {
+.container .buy-ticket,
+.container .query-ticket {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    border-radius: 25px;
-    background-color: #fdfdfd;
-    box-shadow: 0 0 12px 2px rgba(177, 177, 177, 0.664);
+    
 }
-.container .buy-ticket .title {
+.container .buy-ticket .title,
+.container .query-ticket .title {
     margin: 30px 0 22px 0;
     font-size: 28px;
     text-align: center;
@@ -206,10 +244,11 @@ li {
     user-select: none;
 }
 
-.contianer .buy-ticket .buy-ticket {
+/* .contianer .buy-ticket .buy-ticket {
     flex: 1;
-}
-.container .buy-ticket .input-box label {
+} */
+.container .buy-ticket .input-box label,
+.container .query-ticket .input-box label {
     display: inline-block;
     width: 80px;
     height: 21px;
@@ -221,7 +260,8 @@ li {
     user-select: none;
     overflow: hidden;
  }
-.container .buy-ticket .input-box label:after {
+.container .buy-ticket .input-box label:after,
+.container .query-ticket .input-box label:after {
         content:'';
         width: 100%;
         display: inline-block;
@@ -229,7 +269,8 @@ li {
         height: 0;
 }
 
-.container .buy-ticket .input-box input {
+.container .buy-ticket .input-box input,
+.container .query-ticket .input-box input {
     height: 32px;
     width: 250px;
     padding-left: 7px;
@@ -241,12 +282,43 @@ li {
     background-color: transparent;
     margin: 15px 10px;
 }
-.container .buy-ticket .input-box input:focus {
+.container .buy-ticket .input-box input:focus,
+.container .query-ticket .input-box input:focus {
     border-bottom: 3px solid #e2d630;
 }
 
-.container .buy-ticket .buy-success .successIcon{
+.container .buy-ticket .buy-success .successIcon,
+.container .buy-ticket .buy-failed .failedIcon
+{
     display: block;
     margin: 0 auto;
     margin-bottom: 40px;
+}
+.container .query-ticket .query-success {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.container .query-ticket .query-success .point {
+    width: 300px;
+    margin-top: 50px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 22px;
+}
+.container .query-ticket .query-success .point .arrive {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+}
+.container .query-ticket .query-success .departure-time,
+.container .query-ticket .query-success .name {
+    font-size: 18px;
+    margin-bottom: 12px;
 }

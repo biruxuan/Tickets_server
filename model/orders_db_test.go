@@ -1,7 +1,7 @@
 package model
 
 import (
-	"fmt"
+	//"fmt"
 	"testing"
 )
 
@@ -29,15 +29,15 @@ import (
 //}
 
 //func TestGetAllOrders(t *testing.T) {
-//	orders, _ := GetAllOrders()
+//	orders, _ := GetAllOrders(1)
 //	for k, v := range orders {
 //		fmt.Printf("%v: %v", k, v)
 //	}
 //}
 
 func TestCheckOrder(t *testing.T) {
-	ID := CheckOrder("张三", 2)
+	id_card := "123465789"
+	_ = CheckOrder(id_card, 1)
 
-		fmt.Println(ID)
 
 }
