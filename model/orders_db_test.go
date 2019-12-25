@@ -1,7 +1,7 @@
 package model
 
 import (
-	//"fmt"
+	"fmt"
 	"testing"
 )
 
@@ -28,16 +28,14 @@ import (
 //	_=DeleteOrderByID(4)
 //}
 
-//func TestGetAllOrders(t *testing.T) {
-//	orders, _ := GetAllOrders(1)
-//	for k, v := range orders {
-//		fmt.Printf("%v: %v", k, v)
-//	}
-//}
+func TestGetAllOrders(t *testing.T) {
+	orders,_ := GetAllOrders(56)
 
-func TestCheckOrder(t *testing.T) {
-	id_card := "123465789"
-	_ = CheckOrder(id_card, 1)
-
+		fmt.Println(orders)
 
 }
+
+//func TestCheckOrder(t *testing.T) {
+//	id_card := "123465789"
+//	_ = CheckOrder(id_card, 1)
+//}

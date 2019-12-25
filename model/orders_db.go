@@ -14,16 +14,17 @@ type Order struct {
 }
 
 type OrderList struct {
-	trainID        string
-	departure_date string
-	departure_time string
-	start_point    string
-	end_point      string
-	travelTime     int64
-
-	name   string
-	idCard string
+	TicketID int64
+	TrainID        string
+	Departure_date string
+	Departure_time string
+	Start_point    string
+	End_point      string
+	TravelTime     int64
+	Name           string
+	IDCard         string
 }
+
 
 //增加一个订单
 func (order *Order) AddOrder() (int64, error) {
@@ -37,13 +38,15 @@ func (order *Order) AddOrder() (int64, error) {
 	row := utils.Db.QueryRow(queryStr, order.Oticket_id, order.Id_card)
 	var id int64
 	_ = row.Scan(&id)
+	_,_=UpdateTicketBookedNum(order.Oticket_id,"sold")
 	return id, nil
 }
 
 //删除一个订单
-func DeleteOrderByID(ID int64) error {
+func DeleteOrderByID(orderID int64,ticketID int64) error {
 	sqlStr := "delete from orders_info where order_id = ?"
-	_, err := utils.Db.Exec(sqlStr, ID)
+	_, err := utils.Db.Exec(sqlStr, orderID)
+	_,_=UpdateTicketBookedNum(ticketID,"refund")
 	if err != nil {
 		return err
 	}
@@ -51,45 +54,58 @@ func DeleteOrderByID(ID int64) error {
 }
 
 //获取全部订单
-func GetAllOrders(order_id int64) ([]OrderList, error) {
-	//func GetAllTickets(str string) ([]*Ticket, error) {
-	sqlStr := "SELECT tickets_info.train_id,tickets_info.departure_date,tickets_info.departure_time,tickets_info.start_point,tickets_info.end_point,tickets_info.travel_time,orders_info.name,orders_info.id_card from tickets_info,orders_info WHERE order_id=? AND orders_info.oticket_id=tickets_info.ticket_id"
-	//sqlStr := "select * from tickets_info where "+str
+func GetAllOrders(order_id int64) (OrderList, error) {
+	sqlStr := "SELECT tickets_info.ticket_id,tickets_info.train_id,tickets_info.departure_date," +
+		"tickets_info.departure_time,tickets_info.start_point,tickets_info.end_point," +
+		"tickets_info.travel_time,orders_info.name,orders_info.id_card from tickets_info," +
+		"orders_info WHERE  orders_info.oticket_id=tickets_info.ticket_id AND order_id=?"
 
-	rows, err := utils.Db.Query(sqlStr, order_id)
-	if err != nil {
-		return nil, err
-	}
+	//fmt.Println(order_id)
+	row := utils.Db.QueryRow(sqlStr, order_id)
+	//if err != nil {
+	//	fmt.Println(err)
+	//	return nil, err
+	//}
 
-	var ordersList []OrderList
-	for rows.Next() {
-		var (
-			trainID        string
-			departure_date string
-			departure_time string
-			start_point    string
-			end_point      string
-			travelTime     int64
-			nAme           string
-			idCard         string
-		)
-		err2 := rows.Scan(trainID, departure_date, departure_time, start_point, end_point, travelTime, nAme, idCard)
-		if err2 != nil {
-			return nil, err2
-		}
-		t := OrderList{
-			trainID:        trainID,
-			departure_date: departure_date,
-			departure_time: departure_time,
-			start_point:    start_point,
-			end_point:      end_point,
-			travelTime:     travelTime,
-			name:           nAme,
-			idCard:         idCard,
-		}
-		ordersList = append(ordersList, t)
+	//var ordersList []*OrderList
+	//for rows.Next() {
+	//	var (
+	//		trainID        string
+	//		departure_date string
+	//		departure_time string
+	//		start_point    string
+	//		end_point      string
+	//		travelTime     int64
+	//		nAme           string
+	//		idCard         string
+	//	)
+	//	err2 := rows.Scan(trainID, departure_date, departure_time, start_point, end_point, travelTime, nAme, idCard)
+	//	if err2 != nil {
+	//		fmt.Println(err)
+	//
+	//		return nil, err2
+	//	}
+	//	t := &OrderList{
+	//		trainID:        trainID,
+	//		departure_date: departure_date,
+	//		departure_time: departure_time,
+	//		start_point:    start_point,
+	//		end_point:      end_point,
+	//		travelTime:     travelTime,
+	//		name:           nAme,
+	//		idCard:         idCard,
+	//	}
+	//	ordersList = append(ordersList, t)
+	//}
+	//return ordersList, nil
+
+	var orderList OrderList
+	err:=row.Scan(&orderList.TicketID,&orderList.TrainID, &orderList.Departure_date, &orderList.Departure_time,
+		&orderList.Start_point, &orderList.End_point, &orderList.TravelTime, &orderList.Name, &orderList.IDCard)
+	if err!=nil{
+		return orderList,err
 	}
-	return ordersList, nil
+	return orderList, err
 }
 
 //通过身份证查检验订单重复
@@ -98,9 +114,9 @@ func CheckOrder(id_card string, ticketID int64) error {
 	row := utils.Db.QueryRow(sqlStr, id_card, ticketID)
 	var flag int64
 	e := row.Scan(&flag)
-	if e!=nil{
+	if e != nil {
 		return e
-	}else {
+	} else {
 		return nil
 	}
 

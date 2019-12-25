@@ -13,11 +13,10 @@ func main() {
 	//http.HandleFunc("/", controller.Indexhandler)
 	http.HandleFunc("/addTicket", controller.AddTicket)
 	http.HandleFunc("/allTickets", controller.GetAllTickets)
-	http.HandleFunc("/update", controller.UpdateTicketBooked)
 	http.HandleFunc("/delete", controller.DeleteTicket)
 //订单部分
 	http.HandleFunc("/buyticket", controller.AddOrder)
-	http.HandleFunc("/deleteOrder", controller.DeleteOrder)
+	http.HandleFunc("/refundorder", controller.DeleteOrder)
 	http.HandleFunc("/queryticket", controller.GetAllOrderss)
 	//http.HandleFunc("/update", controller.UpdateTicketBooked)
 

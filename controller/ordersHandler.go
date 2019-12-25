@@ -8,37 +8,36 @@ import (
 	"strconv"
 )
 
-//获取全部订单
+//根据订单号获取一个订单
 func GetAllOrderss(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
-		//http.Error(w, "error", 404)
 		w.WriteHeader(404)
 	} else {
-		order_id := r.PostFormValue("order_id")
-		iOrderID, _ := strconv.ParseInt(order_id, 10, 0)
-		ordersList, _ := model.GetAllOrders(iOrderID)
-		//for k, v := range ordersList {
-		//	fmt.Printf("%v: %v", k, v)
-		//}
+		orderID := r.PostFormValue("order_id")
+		iOrderID, _ := strconv.ParseInt(orderID, 10, 0)
+		orderList, err := model.GetAllOrders(iOrderID)
+		//fmt.Println(orderList)
+		if err != nil {
+			w.WriteHeader(404)
 
-		//t := template.Must(template.ParseFiles("views/pages/tickets_manger.html"))
-		//t.Execute(w, tickets)
-		w.Header().Set("Content-Type", "application/json")
-		err := json.NewEncoder(w).Encode(ordersList)
-		fmt.Println(err)
-
+		} else {
+			w.Header().Set("Content-Type", "application/json")
+			_ = json.NewEncoder(w).Encode(orderList)
+		}
 	}
 }
 
 //删除一张订单
 func DeleteOrder(w http.ResponseWriter, r *http.Request) {
 	//获取要修改的班次
-	order_id := r.PostFormValue("ticket_id")
-	//formData=
-	//json.NewDecoder(r.Body).Decode(&formData)
-	//进行类型转换
-	iOrderID, _ := strconv.ParseInt(order_id, 10, 0)
-	err := model.DeleteTicketByID(iOrderID)
+	orderID := r.PostFormValue("order_id")
+	ticketID := r.PostFormValue("ticket_id")
+
+	iOrderID, _ := strconv.ParseInt(orderID, 10, 0)
+	iticketID, _ := strconv.ParseInt(ticketID, 10, 0)
+
+	fmt.Println(iOrderID)
+	err := model.DeleteOrderByID(iOrderID,iticketID)
 	if err != nil {
 		w.WriteHeader(404)
 		//panic(err)
@@ -67,9 +66,7 @@ func AddOrder(w http.ResponseWriter, r *http.Request) {
 		}
 		err := model.CheckOrder(t.Id_card, t.Oticket_id)
 		if err != nil {
-			fmt.Println("开始插入数据库")
-			ID, _ := t.AddOrder()
-			fmt.Println(ID)
+			ID,_ := t.AddOrder()
 			w.Header().Set("Content-Type", "application/json")
 			_ = json.NewEncoder(w).Encode(ID)
 		} else {

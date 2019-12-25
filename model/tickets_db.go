@@ -124,7 +124,7 @@ func DeleteTicketByID(ID int64) error {
 }
 
 //修改已定车票
-func UpdateTicketBookedNum(ID int64, status string) (map[string]int64, error) {
+func UpdateTicketBookedNum(ID int64, status string) (int64, error) {
 	var sqlStr string
 	if status == "refund" {
 		//退票
@@ -136,7 +136,7 @@ func UpdateTicketBookedNum(ID int64, status string) (map[string]int64, error) {
 
 	_, err := utils.Db.Exec(sqlStr, ID)
 	if err != nil {
-		return nil,err
+		return -1,err
 	}
 
 	sqlQueryrow := "select booked_num from tickets_info where ticket_id = ?"
@@ -144,9 +144,9 @@ func UpdateTicketBookedNum(ID int64, status string) (map[string]int64, error) {
 	var b_n int64
 	err2:=row.Scan(&b_n)
 	if err2 != nil {
-		return nil,err2
+		return -1,err2
 	}
-	num:=make(map[string]int64)
-	num["Booked_num"]=b_n
-	return num, nil
+	//num:=make(map[string]int64)
+	//num["Booked_num"]=b_n
+	return b_n, nil
 }

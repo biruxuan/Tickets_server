@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8477a36f-1f87-49d0-81ab-0dc2dd9d6733" name="Default Changelist" comment="">
+    <list default="true" id="8477a36f-1f87-49d0-81ab-0dc2dd9d6733" name="Default Changelist" comment="可以正常增加订单，查询订单不可用">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/ordersHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/ordersHandler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/ticketsHandler.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/ticketsHandler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.exe" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/orders_db.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/orders_db.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/orders_db_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/orders_db_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/tickets_db.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/tickets_db.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/view/static/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/static/js/buy-ticket.js" beforeDir="false" afterPath="$PROJECT_DIR$/view/static/js/buy-ticket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/static/js/query-ticket.js" beforeDir="false" afterPath="$PROJECT_DIR$/view/static/js/query-ticket.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/view/static/js/ticket-list.js" beforeDir="false" afterPath="$PROJECT_DIR$/view/static/js/ticket-list.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,7 +45,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/model" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
   </component>
@@ -52,6 +55,7 @@
       <working_directory value="$PROJECT_DIR$/" />
       <kind value="FILE" />
       <filePath value="$PROJECT_DIR$/main.go" />
+      <output_directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
     <configuration name="go test model" type="GoTestRunConfiguration" factoryName="Go Test" nameIsGenerated="true">
@@ -111,10 +115,10 @@
       <screen x="1920" y="-848" width="1080" height="1880" />
     </state>
     <state x="2052" y="-250" key="#SQL_Dialects/0.0.1536.824/1920.-848.1080.1880@1920.-848.1080.1880" timestamp="1577157175466" />
-    <state x="1920" y="-253" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1577101047404">
+    <state x="1920" y="-253" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1577239555113">
       <screen x="1920" y="-848" width="1080" height="1880" />
     </state>
-    <state x="1920" y="-253" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.-848.1080.1880@1920.-848.1080.1880" timestamp="1577101047404" />
+    <state x="1920" y="-253" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.-848.1080.1880@1920.-848.1080.1880" timestamp="1577239555113" />
     <state x="2198" y="-119" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1577110711049">
       <screen x="1920" y="-848" width="1080" height="1880" />
     </state>
@@ -127,26 +131,26 @@
       <screen x="1920" y="-848" width="1080" height="1880" />
     </state>
     <state x="2058" y="-406" key="CommitChangelistDialog2/0.0.1536.824/1920.-848.1080.1880@1920.-848.1080.1880" timestamp="1577198686743" />
-    <state x="2240" y="-153" key="FileChooserDialogImpl" timestamp="1577101046042">
+    <state x="2240" y="-153" key="FileChooserDialogImpl" timestamp="1577239547839">
       <screen x="1920" y="-848" width="1080" height="1880" />
     </state>
-    <state x="2240" y="-153" key="FileChooserDialogImpl/0.0.1536.824/1920.-848.1080.1880@1920.-848.1080.1880" timestamp="1577101046042" />
-    <state width="1037" height="346" key="GridCell.Tab.0.bottom" timestamp="1577198395745">
+    <state x="2240" y="-153" key="FileChooserDialogImpl/0.0.1536.824/1920.-848.1080.1880@1920.-848.1080.1880" timestamp="1577239547839" />
+    <state width="1037" height="346" key="GridCell.Tab.0.bottom" timestamp="1577243995499">
       <screen x="1920" y="-848" width="1080" height="1880" />
     </state>
-    <state width="1037" height="346" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.-848.1080.1880@1920.-848.1080.1880" timestamp="1577198395745" />
-    <state width="1037" height="346" key="GridCell.Tab.0.center" timestamp="1577198395745">
+    <state width="1037" height="346" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.-848.1080.1880@1920.-848.1080.1880" timestamp="1577243995499" />
+    <state width="1037" height="346" key="GridCell.Tab.0.center" timestamp="1577243995499">
       <screen x="1920" y="-848" width="1080" height="1880" />
     </state>
-    <state width="1037" height="346" key="GridCell.Tab.0.center/0.0.1536.824/1920.-848.1080.1880@1920.-848.1080.1880" timestamp="1577198395745" />
-    <state width="1037" height="346" key="GridCell.Tab.0.left" timestamp="1577198395745">
+    <state width="1037" height="346" key="GridCell.Tab.0.center/0.0.1536.824/1920.-848.1080.1880@1920.-848.1080.1880" timestamp="1577243995499" />
+    <state width="1037" height="346" key="GridCell.Tab.0.left" timestamp="1577243995499">
       <screen x="1920" y="-848" width="1080" height="1880" />
     </state>
-    <state width="1037" height="346" key="GridCell.Tab.0.left/0.0.1536.824/1920.-848.1080.1880@1920.-848.1080.1880" timestamp="1577198395745" />
-    <state width="1037" height="346" key="GridCell.Tab.0.right" timestamp="1577198395745">
+    <state width="1037" height="346" key="GridCell.Tab.0.left/0.0.1536.824/1920.-848.1080.1880@1920.-848.1080.1880" timestamp="1577243995499" />
+    <state width="1037" height="346" key="GridCell.Tab.0.right" timestamp="1577243995499">
       <screen x="1920" y="-848" width="1080" height="1880" />
     </state>
-    <state width="1037" height="346" key="GridCell.Tab.0.right/0.0.1536.824/1920.-848.1080.1880@1920.-848.1080.1880" timestamp="1577198395745" />
+    <state width="1037" height="346" key="GridCell.Tab.0.right/0.0.1536.824/1920.-848.1080.1880@1920.-848.1080.1880" timestamp="1577243995499" />
     <state width="1037" height="432" key="GridCell.Tab.1.bottom" timestamp="1577159881934">
       <screen x="1920" y="-848" width="1080" height="1880" />
     </state>
