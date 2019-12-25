@@ -123,30 +123,21 @@ func DeleteTicketByID(ID int64) error {
 	return nil
 }
 
-//修改已定车票
-func UpdateTicketBookedNum(ID int64, status string) (int64, error) {
-	var sqlStr string
-	if status == "refund" {
-		//退票
-		sqlStr = "update tickets_info set booked_num = booked_num-1  where ticket_id =?"
-	} else if status == "sold" {
-		//售票
-		sqlStr = "update tickets_info set booked_num = booked_num+1  where ticket_id =?"
-	}
-
-	_, err := utils.Db.Exec(sqlStr, ID)
+//退票或买票，修改已订购数量
+func UpdateTicketBookedNum(ID int64)  error {
+	sqlStr:="update tickets_info set booked_num =( select count(oticket_id) from orders_info where oticket_id =?) WHERE  tickets_info.ticket_id=?"
+	_, err := utils.Db.Exec(sqlStr, ID,ID)
 	if err != nil {
-		return -1,err
+		return err
 	}
-
-	sqlQueryrow := "select booked_num from tickets_info where ticket_id = ?"
-	row := utils.Db.QueryRow(sqlQueryrow, ID)
-	var b_n int64
-	err2:=row.Scan(&b_n)
-	if err2 != nil {
-		return -1,err2
-	}
+	//sqlQueryrow := "select rated_load,booked_num from tickets_info where ticket_id = ?"
+	//row := utils.Db.QueryRow(sqlQueryrow, ID)
+	//var ratedLoad,bookedNum int64
+	//err2:=row.Scan(&ratedLoad,bookedNum)
+	//if err2 != nil {
+	//	return -1,err2
+	//}
 	//num:=make(map[string]int64)
 	//num["Booked_num"]=b_n
-	return b_n, nil
+	return  nil
 }

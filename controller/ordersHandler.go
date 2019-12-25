@@ -3,7 +3,6 @@ package controller
 import (
 	"Tickets_server/model"
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 )
@@ -36,11 +35,9 @@ func DeleteOrder(w http.ResponseWriter, r *http.Request) {
 	iOrderID, _ := strconv.ParseInt(orderID, 10, 0)
 	iticketID, _ := strconv.ParseInt(ticketID, 10, 0)
 
-	fmt.Println(iOrderID)
-	err := model.DeleteOrderByID(iOrderID,iticketID)
+	err := model.DeleteOrderByID(iOrderID, iticketID)
 	if err != nil {
 		w.WriteHeader(404)
-		//panic(err)
 	} else {
 		w.WriteHeader(200)
 	}
@@ -66,9 +63,12 @@ func AddOrder(w http.ResponseWriter, r *http.Request) {
 		}
 		err := model.CheckOrder(t.Id_card, t.Oticket_id)
 		if err != nil {
-			ID,_ := t.AddOrder()
-			w.Header().Set("Content-Type", "application/json")
-			_ = json.NewEncoder(w).Encode(ID)
+			ID, _ := t.AddOrder()
+			if ID > 0 {
+				w.Header().Set("Content-Type", "application/json")
+				_ = json.NewEncoder(w).Encode(ID)
+			}
+
 		} else {
 			w.WriteHeader(404)
 		}

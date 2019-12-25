@@ -2,6 +2,8 @@ package model
 
 import (
 	"Tickets_server/utils"
+	"fmt"
+
 	//"fmt"
 )
 
@@ -14,7 +16,7 @@ type Order struct {
 }
 
 type OrderList struct {
-	TicketID int64
+	TicketID       int64
 	TrainID        string
 	Departure_date string
 	Departure_time string
@@ -25,11 +27,10 @@ type OrderList struct {
 	IDCard         string
 }
 
-
 //增加一个订单
 func (order *Order) AddOrder() (int64, error) {
 	sqlStr := "insert into orders_info(order_id,oticket_id,name,id_card,phone)" +
-		"values(?,?,?,?,?)"
+		"values(?,?,?,?,?) "
 	_, err := utils.Db.Exec(sqlStr, order.Order_id, order.Oticket_id, order.Name, order.Id_card, order.Phone)
 	if err != nil {
 		return -1, err
@@ -38,15 +39,18 @@ func (order *Order) AddOrder() (int64, error) {
 	row := utils.Db.QueryRow(queryStr, order.Oticket_id, order.Id_card)
 	var id int64
 	_ = row.Scan(&id)
-	_,_=UpdateTicketBookedNum(order.Oticket_id,"sold")
+	_ = UpdateTicketBookedNum(order.Oticket_id)
+	//if err != nil {
+	//	return -1, err
+	//}
 	return id, nil
 }
 
 //删除一个订单
-func DeleteOrderByID(orderID int64,ticketID int64) error {
+func DeleteOrderByID(orderID int64, ticketID int64) error {
 	sqlStr := "delete from orders_info where order_id = ?"
 	_, err := utils.Db.Exec(sqlStr, orderID)
-	_,_=UpdateTicketBookedNum(ticketID,"refund")
+	err = UpdateTicketBookedNum(ticketID)
 	if err != nil {
 		return err
 	}
@@ -100,10 +104,10 @@ func GetAllOrders(order_id int64) (OrderList, error) {
 	//return ordersList, nil
 
 	var orderList OrderList
-	err:=row.Scan(&orderList.TicketID,&orderList.TrainID, &orderList.Departure_date, &orderList.Departure_time,
+	err := row.Scan(&orderList.TicketID, &orderList.TrainID, &orderList.Departure_date, &orderList.Departure_time,
 		&orderList.Start_point, &orderList.End_point, &orderList.TravelTime, &orderList.Name, &orderList.IDCard)
-	if err!=nil{
-		return orderList,err
+	if err != nil {
+		return orderList, err
 	}
 	return orderList, err
 }
@@ -111,11 +115,17 @@ func GetAllOrders(order_id int64) (OrderList, error) {
 //通过身份证查检验订单重复
 func CheckOrder(id_card string, ticketID int64) error {
 	sqlStr := "select order_id from orders_info where id_card=?  and oticket_id= ?"
+	sqlStr2 := "select booked_num,rated_load from tickets_info where ticket_id= ?"
+
 	row := utils.Db.QueryRow(sqlStr, id_card, ticketID)
 	var flag int64
 	e := row.Scan(&flag)
-	if e != nil {
-		return e
+	row2 := utils.Db.QueryRow(sqlStr2, ticketID)
+	var bookedNum, ratedLoad int64
+	err := row2.Scan( &bookedNum, &ratedLoad)
+	fmt.Println(e,err)
+	if e != nil && bookedNum<ratedLoad  {
+		return e //成功，可以插入数据库
 	} else {
 		return nil
 	}
